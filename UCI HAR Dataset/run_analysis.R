@@ -4,8 +4,8 @@ url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR
 data_path <- "UCI HAR Dataset"
 result_folder <- "results"
 
-##Install required packacets  
-# looks if package is installed
+##Install required packages  
+# check if package is installed
 
 if(!is.element("plyr", installed.packages()[,1])){
     print("Installing packages")
@@ -20,7 +20,7 @@ if(!file.exists(file)){
     
     ##Downloads the data file
     print("downloading Data")
-    download.file(url,file,method="curl")# mode = "wb")
+    download.file(url,file,method="curl")
     
 }
 
@@ -29,7 +29,7 @@ if(!file.exists(result_folder)){
     dir.create(result_folder)
 } 
 
-##reads a table from the zip data file and applies cols
+##reads a table from the zip data file
 getTable <- function (filename,cols = NULL){
     
     print(paste("Getting table:", filename))
@@ -61,7 +61,7 @@ getData <- function(type, features){
     return (cbind(subject_data,y_data,x_data)) 
 }
 
-##saves the data into the result folder
+##saves the data into the results folder
 saveResult <- function (data,name){
     
     print(paste("Saving data", name))
@@ -81,7 +81,7 @@ features <- getTable("features.txt")
 train <- getData("train",features)
 test <- getData("test",features)
 
-## 1. Merges the training and the test sets to create one data set. < DONE
+## 1. Merges the training and the test sets to create one data set.
 # merge datasets
 data <- rbind(train, test)
 
@@ -90,8 +90,8 @@ data <- arrange(data, id)
 
 
 
-## 3. Uses descriptive activity names to name the activities in the data set < DONE
-## 4. Appropriately labels the data set with descriptive activity names.  < DONE
+## 3. Uses descriptive activity names to name the activities in the data set
+## 4. Appropriately labels the data set with descriptive activity names.
 
 activity_labels <- getTable("activity_labels.txt")
 
